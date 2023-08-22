@@ -20,7 +20,7 @@ logger = logging.getLogger("autofaiss")
 
 def get_index_size(index: faiss.Index) -> int:
     """Returns the size in RAM of a given index"""
-    with NamedTemporaryFile() as tmp_file:
+    with NamedTemporaryFile(delete=False) as tmp_file:
         faiss.write_index(index, tmp_file.name)
         size_in_bytes = Path(tmp_file.name).stat().st_size
 
